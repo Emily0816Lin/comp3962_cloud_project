@@ -20,8 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (data.email === config.adminEmail) {
                         // For admin
-                        let adminItem = '<li><a href="docdashboard.html">Admin</a></li>';
-                        navList.innerHTML = homeItem + adminItem;
+                        let adminItem1 = '<li><a href="docdashboard.html">View Patients</a></li>';
+                        let adminItem2 ='<li><a href="selectappointment.html">Select Slots</a></li>';
+                        navList.innerHTML = homeItem + adminItem1 +adminItem2;
                     } else {
                         // For regular users
                         let bookItem = '<li><a href="book.html">Book Appointment</a></li>';
