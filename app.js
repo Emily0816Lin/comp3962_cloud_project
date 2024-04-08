@@ -371,7 +371,24 @@ app.post("/addSlot", async (req, res) => {
   }
 });
 
+// Get slots endpoint
+app.get("/getSlots", async (req, res) => {
+  const params = {
+    TableName: "appointment",
+    // Add any specific filters if needed, for example:
+    // FilterExpression: "attribute_exists(Available) AND Available = :val",
+    // ExpressionAttributeValues: { ":val": "yes" }
+  };
 
+  try {
+    const data = await docClient.scan(params).promise();
+    console.log("Slots fetched successfully:", data.Items);
+    res.json(data.Items);
+  } catch (error) {
+    console.error("Failed to fetch slots:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch slots." });
+  }
+});
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });

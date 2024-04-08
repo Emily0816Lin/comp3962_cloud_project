@@ -38,7 +38,7 @@ document
     }
 
     // Convert to 12-hour format and format for display
-   // const startPeriod = hours >= 12 ? "PM" : "AM";
+    // const startPeriod = hours >= 12 ? "PM" : "AM";
     const endPeriod = endHours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
     endHours = endHours % 12 || 12;
@@ -54,13 +54,17 @@ document
     // document.getElementById(
     //   "time-slot-display"
     // ).textContent = `${formattedStartTime} - ${formattedEndTime}`;
+
     // Assuming you have an endpoint to add slots
     fetch("/addSlot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ date: formattedDate, time: `${formattedStartTime} - ${formattedEndTime}` }),
+      body: JSON.stringify({
+        date: formattedDate,
+        time: `${formattedStartTime} - ${formattedEndTime}`,
+      }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -77,7 +81,40 @@ document
       });
   });
 
+// Add event listener to the "View Slots" button
+document.getElementById("view-slots-btn").addEventListener("click", () => {
+  fetch("/getSlots", {
+    // Assuming you have an endpoint to fetch slots
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((slots) => {
+      console.log("Slots retrieved:", slots);
+      showSlotsTable(slots); // Call the function to display slots in a table
+    })
+    .catch((error) => {
+      console.error("Error fetching slots:", error);
+    });
+});
 
+function showSlotsTable(slots) {
+  const tableBody = document.getElementById("slots-table-body");
+  tableBody.innerHTML = ""; // Clear previous slots
 
+  slots.forEach((slot) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+            <td>${slot.date}</td>
+            <td>${slot.time}</td>
+        `;
+    tableBody.appendChild(row);
+  });
 
-
+  // Show the table container
+  document.getElementById("slots-table-container").style.display = "block";
+}

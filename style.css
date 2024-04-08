@@ -267,3 +267,26 @@ footer {
     background-color: #0056b3;
 }
 
+/* code for the slots table in the doctor dashboard */
+/* Style for the table */
+    #slots-table {
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    /* Style for the table header and cells */
+    #slots-table th, #slots-table td {
+        border: 1px solid black;
+        text-align: left;
+        padding: 8px;
+    }
+
+    /* Style for the table header */
+    #slots-table th {
+        background-color: #f2f2f2;
+    }
+
+    /* Style to make the table container visible */
+    #slots-table-container {
+        display: block;
+    }
