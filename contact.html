@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Clinic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="book.html">Book Appointment</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <!-- <li><a href="docdashboard.html">Admin</a></li> -->
+                <!-- <li class="right"><button class="login-btn">Sign up</button></li> -->
+                <li class="right"><button class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="contact-info">
+                <h2>Our Contact Information</h2>
+                <p>Email: eschedulerapp@gmail.com</p>
+                <p>Phone: +1234567890</p>
+                <p>Address: 123 Clinic St, Burnaby, British Columbia</p>
+            </div>
+            <div class="map">
+                <!-- Embed a map or provide directions -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.6249371381753!2d-122.08381158469072!3d37.38614527983858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbc6a7fda9f47%3A0x7b963e0ac947f80e!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1647099179262!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Clinic. All rights reserved.</p>
+    </footer>
+    <script>
+        // Add event listener to the logout button
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            // Send a request to the server to destroy the session
+            fetch('/logout', {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect the user to the main page after successful logout
+                    window.location.href = '/main.html'; // Change '/main.html' to the appropriate main page URL
+                } else {
+                    console.error('Logout failed');
+                }
+            })
+            .catch(error => console.error('Error during logout:', error));
+        });
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

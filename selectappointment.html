@@ -1,0 +1,63 @@
+<!-- Doctor's Slot Specification Form -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Slots - E-Health Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="docdashboard.html">View Patients</a></li>
+                <li><a href="selectappointment.html">Select Slots</a></li>
+                <!-- <li class="right"><button class="login-btn">Sign up</button></li> -->
+                <li class="right"><button class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+   
+    <main>
+    <form id="slot-specification-form">
+    <label for="slot-date">Date:</label>
+    <input type="date" id="slot-date" name="slot-date"><br>
+    <br>    
+    <label for="slot-time">Time:</label>
+    <input type="time" id="slot-time" name="slot-time" onchange="updateTimeSlot()"><br>
+    <br>
+
+    <button type="submit">Add Slot</button>
+</form>
+
+    </main>
+    <footer>
+        <p>&copy; 2024 E-Health Scheduler</p>
+    </footer>
+
+    <script>
+        // Add event listener to the logout button
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            // Send a request to the server to destroy the session
+            fetch('/logout', {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect the user to the main page after successful logout
+                    window.location.href = '/main.html'; // Change '/main.html' to the appropriate main page URL
+                } else {
+                    console.error('Logout failed');
+                }
+            })
+            .catch(error => console.error('Error during logout:', error));
+        });
+
+    </script>
+    <script src="docappointment.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - E-Health Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="book.html">Book Appointment</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <!-- <li><a href="docdashboard.html">Admin</a></li> -->
+                <!-- <li class="right"><button class="login-btn">Sign up</button></li> -->
+                <li class="right"><button class="logout-btn">Log Out</button></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!--  Display available slots details -->
+    <main class="form-container">
+    <form id="appointmentForm">
+        <h4>Please fill out the following fields to schedule your appointment:</h4>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required readonly>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div> -->
+        <fieldset>
+            <legend>Available Slots</legend>
+            <div class="form-group">
+                <label for="date">Available Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            
+            <div id="time-slots">   
+                </div>
+            </div>
+        </fieldset>
+            <button type="submit">Book Appointment</button>
+    </form>
+    
+
+    <footer>
+        <p>&copy; 2024 E-Health Scheduler</p>
+    </footer>
+    <script>
+        // Fetch user data from the server and populate the form fields
+        fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                // Populate name field
+                document.getElementById('name').value = data.name;
+    
+                // Populate email field
+                document.getElementById('email').value = data.email;
+            })
+            .catch(error => console.error('Error fetching user data:', error));
+    </script> 
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
